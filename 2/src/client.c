@@ -3,7 +3,7 @@
 #include <sys/file.h>
 #include <string.h>
 
-int main(int argc, char** argv)
+int main(int argc, char** argv) // client data qwe tyr ororoo asdsa
 {
     if (argc < 2) {
         puts("Usage: ./client <file> <message blocks>");
@@ -18,7 +18,6 @@ int main(int argc, char** argv)
             continue;
         };
         if (i == argc) i = 2;
-        char data[512];
         lseek(fd, 0, SEEK_END);
         int sz = write(fd, argv[i], strlen(argv[i]));
         if (sz > 0) printf("Client %d writes: %s\n", getpid(), argv[i]);
