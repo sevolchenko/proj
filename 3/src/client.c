@@ -4,14 +4,17 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
+#define BLOCK 512
 int main(int argc, char **argv) {
-    if (argc < 3) {
+    if (argc < 2) {
         printf("USAGE: ./client <pipefd_write> <message>\n");
         _exit(1);
     }
-    int pipefd_write = strtol(argv[2], NULL, 10);
+    char pid[BLOCK];
     int sz;
-    for (int i=1; i<argc; i++)
-        sz = write(pipefd_write, argv[i], sizeof(argv[i]));
+    for (int i = 1; i < argc; i++) {
+        sprintf(pid, "PID: %d, Data: %s", getpid(), argv[i]);
+        sz = write(STDOUT_FILENO, pid, sizeof(pid));
+    }
     _exit(0);
 }
